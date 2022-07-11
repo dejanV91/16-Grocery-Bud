@@ -4,13 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Grocery Bud</title>
 </head>
 <body>
 
     <section class="center">
-        
+        <div class="message">
+            <p>Lorem, ipsum dolor.</p>
+        </div>
+        <div class="title">
+            <h1>grocery bud</h1>
+        </div>
+        <form class="formSection" action="">
+            <input type="text" placeholder="e.g. bread" id="inputField">
+            <button type="submit" id="btn">submit</button>
+        </form>
+        <div class="content" >
+            <article class="singleItem">
+                <h4>eggs</h4>
+                <div class="icons">
+                    <span id="edit" class="material-symbols-outlined">
+                        border_color
+                    </span>
+                    <span id="delete" class="material-symbols-outlined">
+                        delete
+                    </span>
+                </div>
+            </article>
+            <article class="singleItem">
+                <h4>eggs</h4>
+                <div class="icons">
+                    <span id="edit" class="material-symbols-outlined">
+                        border_color
+                    </span>
+                    <span id="delete" class="material-symbols-outlined">
+                        delete
+                    </span>
+                </div>
+            </article>
+        </div>
+        <div class="clearSection show">
+            <button class="clearItems">clear items</button>
+        </div>
     </section>
-    
+    <script src="app.js"></script>
 </body>
 </html>
