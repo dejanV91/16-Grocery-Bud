@@ -5,6 +5,7 @@ const clearAllBtn = document.querySelector(".clearItem");
 const singleItemDiv = document.querySelectorAll(".singleItem");
 const content = document.querySelector(".content");
 
+const paragraphMessage= document.getElementById("message");
 const inputSection = document.getElementById("inputField");
 const submitBtn = document.getElementById("btn");
 
@@ -13,14 +14,16 @@ let sumItems= "";
 
 submitBtn.addEventListener("click", (e)=>{
     e.preventDefault();
-    
-    addItem();
+    // add items when submit
+    addItem(); 
     
     
 });
 
 function addItem (){
     let inputSet = inputSection.value;
+
+    if (inputSet.trim() !== "") {
     let single = 
             `<article class="singleItem">
             <h4>${inputSet}</h4>
@@ -39,4 +42,14 @@ function addItem (){
     // add all insert(string) in variable
     sumItems += list[list.length-1];
     content.innerHTML = sumItems;
+
+    
+    paragraphMessage.innerHTML = "item added in list";
+    messageDiv.classList.add("show");
+    
+    paragraphMessage.style.backgroundColor = "rgb(204, 252, 192)"
+    setTimeout(()=>{messageDiv.classList.remove("show")
+    },2000);
+    }
+
 }

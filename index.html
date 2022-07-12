@@ -12,13 +12,13 @@
 
     <section class="center">
         <div class="message">
-            <!-- inser from js <p> -->
+            <p id="message"></p>
         </div>
         <div class="title">
             <h1>grocery bud</h1>
         </div>
         <form class="formSection" action="">
-            <input type="text" placeholder="e.g. bread" id="inputField">
+            <input type="text" autocomplete="off" onfocus="this.value=''" placeholder="e.g. bread" id="inputField" required>
             <button type="submit" id="btn">submit</button>
         </form>
         <div class="content" >
