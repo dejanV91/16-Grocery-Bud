@@ -1,7 +1,7 @@
 const messageDiv = document.querySelector(".message");
 const clearDiv = document.querySelector(".clearSection");
 
-const clearAllBtn = document.querySelector(".clearItem");
+const clearAllBtn = document.querySelector(".clearItems");
 const singleItemDiv = document.querySelectorAll(".singleItem");
 const content = document.querySelector(".content");
 
@@ -15,10 +15,15 @@ let sumItems= "";
 submitBtn.addEventListener("click", (e)=>{
     e.preventDefault();
     // add items when submit
-    addItem(); 
-    
-    
+    addItem();  
 });
+
+clearAllBtn.addEventListener("click", ()=>{
+    
+    deleteAllItems();    
+}
+);
+
 
 function addItem (){
     let inputSet = inputSection.value;
@@ -50,6 +55,25 @@ function addItem (){
     paragraphMessage.style.backgroundColor = "rgb(204, 252, 192)"
     setTimeout(()=>{messageDiv.classList.remove("show")
     },2000);
+    clearDiv.classList.add("show");
+    }
+}
+
+function deleteAllItems(){
+    while (list.length > 0) {
+        list.pop();
+    }
+    sumItems="";
+    content.innerHTML = "" ;
+
+    paragraphMessage.innerHTML = "cleared all items";
+    messageDiv.classList.add("show");
+    
+    paragraphMessage.style.backgroundColor = "red"
+    setTimeout(()=>{messageDiv.classList.remove("show")
+    },3000);
+    clearDiv.classList.remove("show");
     }
 
-}
+
+
