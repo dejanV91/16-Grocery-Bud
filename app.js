@@ -2,7 +2,6 @@ const messageDiv = document.querySelector(".message");
 const clearDiv = document.querySelector(".clearSection");
 
 const clearAllBtn = document.querySelector(".clearItems");
-const singleItemDiv = document.querySelectorAll(".singleItem");
 const content = document.querySelector(".content");
 
 const paragraphMessage= document.getElementById("message");
@@ -12,20 +11,19 @@ const submitBtn = document.getElementById("btn");
 const list = [];
 let sumItems= "";
 
-submitBtn.addEventListener("click", (e)=>{
-    e.preventDefault();
-    // add items when submit
-    addItem();  
+submitBtn.addEventListener("click", (a)=>{
+    addItem(a);
 });
 
-clearAllBtn.addEventListener("click", ()=>{
-    
-    deleteAllItems();    
-}
-);
+clearAllBtn.addEventListener("click", deleteAllItems);
 
 
-function addItem (){
+
+
+
+
+function addItem (e){
+    e.preventDefault();
     let inputSet = inputSection.value;
 
     if (inputSet.trim() !== "") {
@@ -33,20 +31,27 @@ function addItem (){
             `<article class="singleItem">
             <h4>${inputSet}</h4>
             <div class="icons">
-                <span id="edit" class="material-symbols-outlined">
+                <span class="material-symbols-outlined edit">
                     border_color
                 </span>
-                <span id="delete" class="material-symbols-outlined">
+                <span  class="material-symbols-outlined delete">
                     delete
                 </span>
             </div>
             </article>`;
+
+    
     // insert items in list
     list.push(single);
 
     // add all insert(string) in variable
     sumItems += list[list.length-1];
     content.innerHTML = sumItems;
+
+    var singleItemDiv = document.querySelectorAll(".singleItem");
+
+    let deleteBtn = singleItemDiv.querySelector(".delete");
+    let editBtn = singleItemDiv.querySelector(".edit");
 
     
     paragraphMessage.innerHTML = "item added in list";
