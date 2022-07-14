@@ -49,9 +49,14 @@ function addItem (e){
     content.innerHTML = sumItems;
 
     var singleItemDiv = document.querySelectorAll(".singleItem");
-
-    let deleteBtn = singleItemDiv.querySelector(".delete");
-    let editBtn = singleItemDiv.querySelector(".edit");
+    singleItemDiv.forEach(function(e){
+        e.addEventListener("click", function(a){
+            let deleteBtn = a.target.querySelector(".delete");
+            deleteBtn.addEventListener("click",function(){
+                console.log(a.target);
+            });
+        });
+    });
 
     
     paragraphMessage.innerHTML = "item added in list";
