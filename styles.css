@@ -40,6 +40,18 @@ body{
     padding: 7px 0;
 }
 
+.greenAlert{
+    color: rgb(4, 61, 21);
+    background-color: rgb(188, 248, 191);
+    visibility: visible;
+}
+
+.redAlert{
+    color: rgb(241, 10, 10);
+    background-color: rgb(250, 198, 198);
+    visibility: visible;
+}
+
 .title{
     text-align: center;
     margin-bottom: 20px;
