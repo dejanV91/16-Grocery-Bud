@@ -80,8 +80,9 @@ function clearAll(){
     showClear();
 }
 //edit single item
-function editItemSingle(){
-    console.log("edit item");
+function editItemSingle(a){
+    const titleElement = a.target.parentNode.previousElementSibling;
+    console.log(titleElement.innerHTML);
 }
 //delete single item
 function deleteItem(a){
