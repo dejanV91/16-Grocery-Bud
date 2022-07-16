@@ -7,9 +7,12 @@ const alertDiv = document.getElementById("message");
 const clearBtn = document.querySelector(".clearSection");
 //==== EVENT LISTENERS
 form.addEventListener("submit",addItem);
+//clear all items
+clearBtn.addEventListener("click", clearAll);
 //edit option
 editItem = "";
 editStatus = false;
+
 //==== FUNCTIONS
 // add item
 function addItem(a){
@@ -22,20 +25,24 @@ function addItem(a){
        item.setAttributeNode(attr);
        item.innerHTML = `<h4>${element}</h4>
                 <div class="icons">
-                    <span id="edit" class="material-symbols-outlined">
+                    <span class="material-symbols-outlined edit">
                         border_color
                     </span>
-                    <span id="delete" class="material-symbols-outlined">
+                    <span class="material-symbols-outlined delete">
                         delete
                     </span>
                 </div>`;
         //append child
         content.appendChild(item);
+        //edit and delete btn in single item
+        const deleteBtn = item.querySelector(".delete");
+        deleteBtn.addEventListener("click", deleteItem);
+        const editBtn = item.querySelector(".edit");
+        editBtn.addEventListener("click", editItemSingle);
         //alert message
         alertDisplay("added item", "greenAlert");
         setBack();
         showClear();
-        clearBtn.addEventListener("click", clearAll);
     }    
 }
 //alert message
@@ -52,17 +59,12 @@ function setBack(){
     editItem = "";
     editStatus = false;
     grocery.value = "";
+    submitBtn.textContent = "submit";
 }
 //clear all items
 function showClear(){
     if (content.children.length > 0) {
         clearBtn.classList.add("show");
-        // clearBtn.addEventListener("click", function(){
-        //     const element = document.querySelectorAll("singleItem");
-        //     element.forEach(function(item){
-        //         content.removeChild(item);
-        //     });
-        // });
     }
     else{
         clearBtn.classList.remove("show");
@@ -76,4 +78,15 @@ function clearAll(){
     });
     alertDisplay("remove all items", "redAlert");
     showClear();
-};
+}
+//edit single item
+function editItemSingle(){
+    console.log("edit item");
+}
+//delete single item
+function deleteItem(a){
+    const item = a.target.parentNode.parentNode;
+    content.removeChild(item);
+    alertDisplay("item deleted", "redAlert");
+    showClear();
+}
