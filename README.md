@@ -2,7 +2,7 @@
 
 Grocery Bud with JavaScript<br>
 <br>
-Demo: **[Grocery](https://dejanv91.github.io/15-Lorem-Ipsum/index.html)**
+Demo: **[Grocery](https://dejanv91.github.io/16-Grocery-Bud/index.html)**
 
 ## Stack:
 * Language: **HTML5**, **CSS3**, **JavaScript**
