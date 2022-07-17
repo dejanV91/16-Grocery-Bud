@@ -43,7 +43,12 @@ function addItem(a){
         alertDisplay("added item", "greenAlert");
         setBack();
         showClear();
-    }    
+    }
+    else if(element && editStatus){
+        editItem.innerHTML = grocery.value;
+        alertDisplay("item edited", "greenAlert");
+        setBack();
+    } 
 }
 //alert message
 function alertDisplay(alert, action){
@@ -81,8 +86,10 @@ function clearAll(){
 }
 //edit single item
 function editItemSingle(a){
-    const titleElement = a.target.parentNode.previousElementSibling;
-    console.log(titleElement.innerHTML);
+    editItem = a.target.parentNode.previousElementSibling;
+    grocery.value=editItem.innerHTML;
+    submitBtn.textContent = "edit";
+    editStatus = true;
 }
 //delete single item
 function deleteItem(a){
