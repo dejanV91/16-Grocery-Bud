@@ -91,6 +91,7 @@ function clearAll(){
         content.removeChild(item);
     });
     alertDisplay("remove all items", "redAlert");
+    localStorage.removeItem("list");
     showClear();
 }
 //edit single item
@@ -105,6 +106,7 @@ function deleteItem(a){
     const item = a.target.parentNode.parentNode;
     content.removeChild(item);
     alertDisplay("item deleted", "redAlert");
+    removeItemLocalStorage(item.dataset.id);
     showClear();
 }
 
@@ -122,6 +124,16 @@ function addLocalStorage(id, value){
     items.push(element);
     localStorage.setItem("list",JSON.stringify(items));
 }
+function removeItemLocalStorage(id){
+    let items = getLocalStorage();
+    items = items.filter(function(item){
+        if (item.id !== id) {
+            return item
+        }
+    });
+    localStorage.setItem("list",JSON.stringify(items));
+}
+
 
 // function getLocalStorage(){
 //     let item = localStorage.getItem("list")
