@@ -56,6 +56,7 @@ function addItem(a){
     else if(element && editStatus){
         editItem.innerHTML = grocery.value;
         alertDisplay("item edited", "greenAlert");
+        editLocalStorage(editId, editItem);
         setBack();
     } 
 }
@@ -97,6 +98,7 @@ function clearAll(){
 //edit single item
 function editItemSingle(a){
     editItem = a.target.parentNode.previousElementSibling;
+    editId=a.target.parentNode.parentNode.dataset.id;
     grocery.value=editItem.innerHTML;
     submitBtn.textContent = "edit";
     editStatus = true;
@@ -134,6 +136,14 @@ function removeItemLocalStorage(id){
     localStorage.setItem("list",JSON.stringify(items));
 }
 
+function editLocalStorage(id, value){
+    const items = getLocalStorage();
+    items.forEach(function(item){
+        if (item.id = id) {
+            console.log(id);
+        }
+    })
+}
 
 // function getLocalStorage(){
 //     let item = localStorage.getItem("list")
