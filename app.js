@@ -5,24 +5,32 @@ const submitBtn = document.getElementById("btn");
 const content = document.querySelector(".content");
 const alertDiv = document.getElementById("message");
 const clearBtn = document.querySelector(".clearSection");
+
+
 //==== EVENT LISTENERS
 form.addEventListener("submit",addItem);
 //clear all items
 clearBtn.addEventListener("click", clearAll);
+
 //edit option
 editItem = "";
 editStatus = false;
+editId="";
 
 //==== FUNCTIONS
 // add item
 function addItem(a){
     a.preventDefault();
     const element = grocery.value;
+    const id = new Date().getTime().toString();
     if(element && !editStatus){
        const item = document.createElement("article");
        const attr = document.createAttribute("class");
        attr.value = "singleItem";
+       const attrId = document.createAttribute("data-id");
+       attrId.value = id;
        item.setAttributeNode(attr);
+       item.setAttributeNode(attrId);
        item.innerHTML = `<h4>${element}</h4>
                 <div class="icons">
                     <span class="material-symbols-outlined edit">
@@ -41,6 +49,7 @@ function addItem(a){
         editBtn.addEventListener("click", editItemSingle);
         //alert message
         alertDisplay("added item", "greenAlert");
+        addLocalStorage(id,element);
         setBack();
         showClear();
     }
@@ -98,3 +107,25 @@ function deleteItem(a){
     alertDisplay("item deleted", "redAlert");
     showClear();
 }
+
+// ========== LOCAL STORAGE
+
+function getLocalStorage(){
+    return localStorage.getItem("list")
+    ? JSON.parse(localStorage.getItem("list"))
+    : [];
+}
+
+function addLocalStorage(id, value){
+    const element = {id,value};
+    let items = getLocalStorage();
+    items.push(element);
+    localStorage.setItem("list",JSON.stringify(items));
+}
+
+// function getLocalStorage(){
+//     let item = localStorage.getItem("list")
+//     ? JSON.parse("list", JSON.stringify(item))
+//     : [];
+//     console.log(item);
+// }
