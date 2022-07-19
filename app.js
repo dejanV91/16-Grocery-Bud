@@ -11,6 +11,8 @@ const clearBtn = document.querySelector(".clearSection");
 form.addEventListener("submit",addItem);
 //clear all items
 clearBtn.addEventListener("click", clearAll);
+// setup local strorage
+window.addEventListener("DOMContentLoaded", setupLocalStorage)
 
 //edit option
 editItem = "";
@@ -24,29 +26,7 @@ function addItem(a){
     const element = grocery.value;
     const id = new Date().getTime().toString();
     if(element && !editStatus){
-       const item = document.createElement("article");
-       const attr = document.createAttribute("class");
-       attr.value = "singleItem";
-       const attrId = document.createAttribute("data-id");
-       attrId.value = id;
-       item.setAttributeNode(attr);
-       item.setAttributeNode(attrId);
-       item.innerHTML = `<h4>${element}</h4>
-                <div class="icons">
-                    <span class="material-symbols-outlined edit">
-                        border_color
-                    </span>
-                    <span class="material-symbols-outlined delete">
-                        delete
-                    </span>
-                </div>`;
-        //append child
-        content.appendChild(item);
-        //edit and delete btn in single item
-        const deleteBtn = item.querySelector(".delete");
-        deleteBtn.addEventListener("click", deleteItem);
-        const editBtn = item.querySelector(".edit");
-        editBtn.addEventListener("click", editItemSingle);
+        addGroceryStorage(id,element);
         //alert message
         alertDisplay("added item", "greenAlert");
         addLocalStorage(id,element);
@@ -56,7 +36,7 @@ function addItem(a){
     else if(element && editStatus){
         editItem.innerHTML = grocery.value;
         alertDisplay("item edited", "greenAlert");
-        editLocalStorage(editId, editItem);
+        editLocalStorage(editId, grocery.value);
         setBack();
     } 
 }
@@ -75,6 +55,7 @@ function setBack(){
     editStatus = false;
     grocery.value = "";
     submitBtn.textContent = "submit";
+    editId="";
 }
 //clear all items
 function showClear(){
@@ -139,15 +120,50 @@ function removeItemLocalStorage(id){
 function editLocalStorage(id, value){
     const items = getLocalStorage();
     items.forEach(function(item){
-        if (item.id = id) {
-            console.log(id);
+        if (item.id === id) {
+            item.value = value;
         }
     })
+   localStorage.setItem("list",JSON.stringify(items));
 }
 
-// function getLocalStorage(){
-//     let item = localStorage.getItem("list")
-//     ? JSON.parse("list", JSON.stringify(item))
-//     : [];
-//     console.log(item);
-// }
+// ==== SETUP LOCAL STORAGE
+function setupLocalStorage(){
+    const items = getLocalStorage();
+    if (items.length > 0) {
+        items.forEach(function(item){
+            console.log(item);
+        addGroceryStorage(item.id, item.value);
+        });
+        content.classList.add("show");
+        showClear();
+    }
+}
+
+function addGroceryStorage(id,element){
+    const item = document.createElement("article");
+       const attr = document.createAttribute("class");
+       attr.value = "singleItem";
+       const attrId = document.createAttribute("data-id");
+       attrId.value = id;
+       item.setAttributeNode(attr);
+       item.setAttributeNode(attrId);
+       item.innerHTML = `<h4>${element}</h4>
+                <div class="icons">
+                    <span class="material-symbols-outlined edit">
+                        border_color
+                    </span>
+                    <span class="material-symbols-outlined delete">
+                        delete
+                    </span>
+                </div>`;
+        //append child
+        content.appendChild(item);
+        //edit and delete btn in single item
+        const deleteBtn = item.querySelector(".delete");
+        deleteBtn.addEventListener("click", deleteItem);
+        const editBtn = item.querySelector(".edit");
+        editBtn.addEventListener("click", editItemSingle);
+}
+
+
